@@ -6,9 +6,9 @@ import services.StoreServicesApi;
 
 public class BaseApiTest {
 
-	Faker faker = new Faker();
-	StoreServicesApi storeServicesApi = new StoreServicesApi();
-	AddPetServiceApi addPetServiceApi = new AddPetServiceApi();
-	Specifications specifications = new Specifications();
-	FindByStatusServiceApi findByStatusServiceApi = new FindByStatusServiceApi();
+  Faker faker = new Faker();
+  StoreServicesApi storeServicesApi = new StoreServicesApi();
+  AddPetServiceApi addPetServiceApi = new AddPetServiceApi();
+  Specifications specifications = new Specifications();
+  FindByStatusServiceApi findByStatusServiceApi = new FindByStatusServiceApi();
 }
