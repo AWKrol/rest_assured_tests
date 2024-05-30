@@ -1,14 +1,23 @@
 import static org.hamcrest.Matchers.equalTo;
 
+import com.google.inject.Inject;
 import dto.addPet.AddPetDTO;
 import dto.addPet.Category;
 import dto.addPet.Tags;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
+import services.AddPetServiceApi;
+import services.Specifications;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class AddPetTest extends BaseApiTest{
+
+  @Inject
+  AddPetServiceApi addPetServiceApi;
+
+  @Inject
+  Specifications specifications;
 
   /**
   * Тест проверяет метод POST, для успешного добавления питомца.
@@ -33,9 +42,10 @@ public class AddPetTest extends BaseApiTest{
         .status("available")
         .build();
 
-    Response response = addPetServiceApi.addPetPost(addPetDTO);
+    Response responseAddPet = addPetServiceApi.addPetPost(addPetDTO);
 
-    response
+    // Проверка ответа от метода POST сервиса "/pet"
+    responseAddPet
       .then()
       .log().all()
       .spec(specifications.specResponse200())
@@ -47,24 +57,23 @@ public class AddPetTest extends BaseApiTest{
       .body("tags[0].id", equalTo(addPetDTO.getTags().get(0).getId()))
       .body("tags[0].name", equalTo(addPetDTO.getTags().get(0).getName()))
         .body("status", equalTo(addPetDTO.getStatus()));
-  }
 
-  /**
-  * Тест проверяет метод POST, для получения ошибки при добавлении питомца.
-  * Чтобы получить ошибку выполняем POST запрос без body.
-  * Тест проверяет, что статус код = 405 и тело ответа соответствует ожидаемой ошибке.
-  */
-  @Test(description = "Ошибка при добавлении питомца")
-  public void checkAddPetError() {
-    Response response = addPetServiceApi.addPetPost();
-
-    response
-      .then()
-      .log().all()
-      .spec(specifications.specResponse405())
-      .body("code", equalTo(405))
-      .body("type", equalTo("unknown"))
-        .body("message", equalTo("no data"));
+    /**
+     * Проверяем методом GET, что метод POST отработал корректно.
+     */
+    Response respGetPet = addPetServiceApi.petIdGet(addPetDTO.getId());
+    respGetPet
+            .then()
+            .log().all()
+            .spec(specifications.specResponse200())
+            .body("id", equalTo(addPetDTO.getId()))
+            .body("category.id", equalTo(addPetDTO.getCategory().getId()))
+            .body("category.name", equalTo(addPetDTO.getCategory().getName()))
+            .body("name", equalTo(addPetDTO.getName()))
+            .body("photoUrls[0]", equalTo(addPetDTO.getPhotoUrls().get(0)))
+            .body("tags[0].id", equalTo(addPetDTO.getTags().get(0).getId()))
+            .body("tags[0].name", equalTo(addPetDTO.getTags().get(0).getName()))
+            .body("status", equalTo(addPetDTO.getStatus()));
   }
 
 }

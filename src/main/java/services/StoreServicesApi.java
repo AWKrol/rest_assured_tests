@@ -2,12 +2,17 @@ package services;
 
 import static io.restassured.RestAssured.given;
 
+import com.google.inject.Inject;
 import dto.OrderPetDTO;
 import io.restassured.response.Response;
 
 public class StoreServicesApi extends Specifications{
 
   private final String BASE_PATH = "/store/order";
+
+  @Inject
+  public StoreServicesApi() {
+  }
 
   public Response createNewOrderForPet(OrderPetDTO orderPetDTO) {
 
