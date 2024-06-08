@@ -33,7 +33,14 @@ public class AddPetServiceApi extends Specifications{
     return
       given(specRequest())
         .when()
-        .get(BASE_PATH + "/" + petId);
+        .get(String.format("%s/%s", BASE_PATH, petId));
+  }
+
+  public Response petIdDelete(int petId) {
+    return
+            given(specRequest())
+                    .when()
+                    .delete(String.format("%s/%s", BASE_PATH, petId));
   }
 
 }

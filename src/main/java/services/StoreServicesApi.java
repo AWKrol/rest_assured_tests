@@ -32,4 +32,18 @@ public class StoreServicesApi extends Specifications{
         .post(BASE_PATH);
   }
 
+  public Response orderGet(int id) {
+    return
+      given(specRequest())
+        .when()
+        .get(String.format("%s/%s", BASE_PATH, id));
+  }
+
+  public Response orderDelete(int id) {
+    return
+      given(specRequest())
+      .when()
+      .delete(String.format("%s/%s", BASE_PATH, id));
+  }
+
 }

@@ -11,9 +11,10 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testng.version>7.5</testng.version>
         <restassured.version>4.2.0</restassured.version>
-        <lombok.version>1.18.12</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <jsonschemavalidator.version>4.3.1</jsonschemavalidator.version>
         <maven.surefire.plugin>3.2.5</maven.surefire.plugin>
         <javafaker.version>1.0.2</javafaker.version>
@@ -21,6 +22,7 @@
         <checkstyle.version>3.3.1</checkstyle.version>
         <guice.version>7.0.0</guice.version>
         <base.url/>
+        <suiteXml/>
     </properties>
 
     <dependencies>
@@ -33,6 +35,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -61,7 +64,7 @@
             <id>prod</id>
             <properties>
                 <base.url>https://petstore.swagger.io/v2</base.url>
-                <suiteXmlFile.profile>prod.xml</suiteXmlFile.profile>
+                <suiteXml>prod.xml</suiteXml>
             </properties>
         </profile>
         <profile>
@@ -71,7 +74,7 @@
             </activation>
             <properties>
                 <base.url>https://petstore.swagger.io/v2</base.url>
-<!--                <suiteXmlFile.profile>src/main/resources/suiteXml/dev.xml</suiteXmlFile.profile>-->
+                <suiteXml>dev.xml</suiteXml>
             </properties>
         </profile>
     </profiles>
@@ -85,12 +88,11 @@
                 <configuration>
                     <systemPropertyVariables>
                         <base.url>${base.url}</base.url>
-<!--                        <browser.name>chrome</browser.name>-->
                         <jdk.tls.client.protocols>TLSv1,TLSv1.1,TLSv1.2</jdk.tls.client.protocols>
                     </systemPropertyVariables>
-<!--                    <suiteXmlFiles>-->
-<!--                        <suiteXmlFile>${suiteXmlFile.profile}</suiteXmlFile>-->
-<!--                    </suiteXmlFiles>-->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/main/resources/suiteXml/${suiteXml}</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
             <plugin>
@@ -134,43 +136,6 @@
                 </executions>
             </plugin>
         </plugins>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <version>${maven.surefire.plugin}</version>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>com.github.spotbugs</groupId>-->
-<!--                <artifactId>spotbugs-maven-plugin</artifactId>-->
-<!--                <version>${spotbugs.version}</version>-->
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>com.github.spotbugs</groupId>-->
-<!--                        <artifactId>spotbugs</artifactId>-->
-<!--                        <version>4.8.3</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
-<!--                <version>${checkstyle.version}</version>-->
-<!--                <configuration>-->
-<!--                    <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
-<!--                    <configLocation>${project.build.sourceDirectory}/../resources/checkstyle.xml</configLocation>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>analyze-compile</id>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>check</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
     </build>
 
 </project>
