@@ -6,8 +6,8 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import services.Specifications;
 import services.StoreServicesApi;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OrderPetTest extends BaseApiTest{
 
@@ -28,7 +28,9 @@ public class OrderPetTest extends BaseApiTest{
     int id = faker.number().numberBetween(1, 10);
     int petId = faker.number().numberBetween(0, 100000);
     int quantity = faker.number().numberBetween(0, 100);
-    String shipDate = String.format("%s+0000",LocalDateTime.now(ZoneId.of("GMT")));
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'+0000'");
+    String shipDate = sdf.format(date);
     String status = "placed";
     boolean complete = true;
 
