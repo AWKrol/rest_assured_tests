@@ -13,15 +13,15 @@ timeout(60){
 
                 sh "docker run --rm --network=host --name $testContainerName -t localhost:5005/apitests"
             }
-//            stage("Publish allure report"){
-//                allure([
-//                        disabled:true,
-//                        results:["$pwd/allure-results"]
-//                ])
-//            }
-//            stage("Telegram notification"){
-//
-//            }
+            stage("Publish allure report"){
+                allure([
+                        disabled:true,
+                        results:["$pwd/allure-results"]
+                ])
+            }
+            stage("Telegram notification"){
+
+            }
         }
         finally {
             sh "docker stop $jobDescription"

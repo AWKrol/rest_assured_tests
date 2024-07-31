@@ -1,4 +1,4 @@
-FROM maven:3
+FROM maven:3-openjdk-18
 
 USER root
 
