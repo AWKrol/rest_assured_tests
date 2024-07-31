@@ -7,5 +7,5 @@ WORKDIR /home/ubuntu/api-tests
 
 COPY . .
 
-
-ENTRYPOINT ["./entrypoint.sh"]
+RUN mvn clean test
+#ENTRYPOINT ["./entrypoint.sh"]
