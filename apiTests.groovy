@@ -30,7 +30,7 @@ timeout(60){
 
 def prepareConfig(){
     def yamlConfig = readYaml text : $YAML_CONFIG
-    yamlConfig.each(k, v -> System.setProperty(v))
+    yamlConfig.each((k, v) -> System.setProperty(k, v))
 }
 
 
