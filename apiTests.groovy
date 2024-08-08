@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-        prepareConfig()
+//        prepareConfig()
         stage('Build and Test') {
             steps {
                 script {
@@ -110,8 +110,8 @@ def triggerJob(def jobName) {
     build job: "$jobName"
 }
 
-def prepareConfig(){
-    def yamlConfig = readYaml text: $YAML_CONFIG
-
-    yamlConfig.each(v -> System.setProperty(v))
-}
+//def prepareConfig(){
+//    def yamlConfig = readYaml text: $YAML_CONFIG
+//
+//    yamlConfig.each(k, v -> System.setProperty(k, v))
+//}
