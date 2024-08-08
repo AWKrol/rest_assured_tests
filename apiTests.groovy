@@ -1,7 +1,7 @@
 
 timeout(60){
     node("maven"){
-        prepareConfig()
+//        prepareConfig()
         def jobDescription = """
             api tests
          """
@@ -28,10 +28,10 @@ timeout(60){
     }
 }
 
-def prepareConfig(){
-    def yamlConfig = readYaml text : $YAML_CONFIG
-    yamlConfig.each((k, v) -> System.setProperty(k, v))
-}
+//def prepareConfig(){
+//    def yamlConfig = readYaml text : $YAML_CONFIG
+//    yamlConfig.each(k, v -> System.setProperty(k, v))
+//}
 
 
 
