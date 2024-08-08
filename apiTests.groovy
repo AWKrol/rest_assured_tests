@@ -113,5 +113,5 @@ def triggerJob(def jobName) {
 def prepareConfig(){
     def yamlConfig = readYaml text: $YAML_CONFIG
 
-    yamlConfig.each(k, v -> System.setProperty(v))
+    yamlConfig.each(v -> System.setProperty(v))
 }
