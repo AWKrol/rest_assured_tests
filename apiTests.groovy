@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'maven-cloud'
+        label 'maven'
     }
     environment {
         TOKEN = credentials('token')
