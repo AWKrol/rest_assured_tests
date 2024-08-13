@@ -1,4 +1,4 @@
-import myUtils.groovy
+import ./myUtils.groovy
 
 timeout(60){
     node("maven"){
