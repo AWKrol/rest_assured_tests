@@ -2,24 +2,24 @@ pipeline {
     agent {
         label 'maven'
     }
-    environment {
-        TOKEN = credentials('token')
-        CHAT_ID = credentials('chatID')
-    }
+//    environment {
+//        TOKEN = credentials('token')
+//        CHAT_ID = credentials('chatID')
+//    }
     stages {
-        stage('Prepare Environment') {
-            steps {
-                script {
-                    echo "Preparing environment..."
-                    env.TESTS_TYPE = params.TESTS_TYPE ?: null
-                    echo "Configuration: TESTS_TYPE=${env.TESTS_TYPE}"
-
-                    if (!env.TESTS_TYPE) {
-                        error("TESTS_TYPE is not defined")
-                    }
-                }
-            }
-        }
+//        stage('Prepare Environment') {
+//            steps {
+//                script {
+//                    echo "Preparing environment..."
+//                    env.TESTS_TYPE = params.TESTS_TYPE ?: null
+//                    echo "Configuration: TESTS_TYPE=${env.TESTS_TYPE}"
+//
+//                    if (!env.TESTS_TYPE) {
+//                        error("TESTS_TYPE is not defined")
+//                    }
+//                }
+//            }
+//        }
         stage('Checkout') {
             steps {
                 script {
