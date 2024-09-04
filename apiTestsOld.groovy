@@ -110,11 +110,11 @@ def triggerJob(def jobName) {
     build job: "$jobName"
 }
 
-def prepareConfig(){
-    def yamlConfig = readYaml text: $YAML_CONFIG
-
-    yamlConfig.each(k, v -> System.setProperty(k, v))
-}
+//def prepareConfig(){
+//    def yamlConfig = readYaml text: $YAML_CONFIG
+//
+//    yamlConfig.each(k, v -> System.setProperty(k, v))
+//}
 
 
 //timeout(60){
