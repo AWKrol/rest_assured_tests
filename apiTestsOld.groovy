@@ -1,7 +1,7 @@
 
 
 timeout(60){
-    node("master"){
+    node("maven"){
         prepareConfig()
         def jobDescription = """
          My api tests description
