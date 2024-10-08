@@ -35,7 +35,7 @@ pipeline {
                         def jobs = [:]
                         env.TESTS_TYPE.split(',').each { v ->
                             jobs["$v"] = {
-                                node("maven-cloud") {
+                                node("maven") {
                                     stage("Running test $v") {
                                         triggerJob("$v")
                                     }
